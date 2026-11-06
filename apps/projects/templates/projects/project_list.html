@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects — Wendwosen Tessema{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-label">Projects</div>
+    <div class="section-content">
+        <div class="back-nav">
+            <a href="/" class="back-link">← Back to Portfolio</a>
+        </div>
+        <h1 class="section-heading">All Projects</h1>
+        <p class="section-description">A complete archive of software products, client architectures, and open experiments.</p>
+
+        <div class="projects-list">
+            {% for project in projects %}
+            <article class="project-card">
+                <div class="project-card-header">
+                    <div class="project-header-left">
+                        <span class="project-number">0{{ forloop.counter }}</span>
+                        <h2 class="project-title">{{ project.title }}</h2>
+                    </div>
+                    <div class="project-links">
+                        {% if project.live_demo_url %}
+                        <a href="{{ project.live_demo_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <span>Live Demo</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+                        </a>
+                        {% endif %}
+                        {% if project.source_code_url %}
+                        <a href="{{ project.source_code_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <span>Code</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <p class="project-description">{{ project.short_description }}</p>
+
+                {% if project.highlights_list %}
+                <ul class="project-highlights">
+                    {% for highlight in project.highlights_list %}
+                    <li>
+                        <span class="highlight-bullet">•</span>
+                        <span>{{ highlight }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <div class="project-tags">
+                    {% for tech in project.tech_list %}
+                    <span class="tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </article>
+            {% empty %}
+            <p class="empty-state">No projects added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+

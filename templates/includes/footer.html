@@ -1,0 +1,18 @@
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <p class="footer-copyright">
+                &copy; {% now "Y" %} Wendwosen Tessema
+            </p>
+            <p class="footer-location">
+                <span class="location-dot"></span> Bahir Dar, Ethiopia
+            </p>
+        </div>
+        <div class="footer-links">
+            <a href="{{ profile.github_url|default:'https://github.com' }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="{{ profile.linkedin_url|default:'https://linkedin.com' }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="{{ profile.telegram_url|default:'https://t.me' }}" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a href="mailto:{{ profile.email|default:'wendwosentessema@gmail.com' }}">Email</a>
+        </div>
+    </div>
+</footer>

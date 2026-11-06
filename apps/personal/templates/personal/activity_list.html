@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Beyond the Code — Wendwosen Tessema{% endblock %}
+
+{% block content %}
+<section class="editorial-section">
+    <div class="back-nav">
+        <a href="{% url 'core:home' %}#beyond-the-code" class="back-link">← Back to Portfolio</a>
+    </div>
+
+    <div class="section-title-wrap">
+        <h1 class="section-title">Beyond the Code</h1>
+        <p class="section-subtitle">Activities, sports, creative pursuits, and community life outside software engineering.</p>
+    </div>
+
+    <div class="beyond-code-boxes">
+        {% for activity in activities %}
+        <div class="activity-box js-activity-box" data-href="{% url 'personal:detail' slug=activity.slug %}">
+            <div class="activity-box-content">
+                <div class="activity-box-header">
+                    <h2 class="activity-box-title">{{ activity.title }}</h2>
+                    <span class="activity-box-arrow" aria-hidden="true">↗</span>
+                </div>
+                <p class="activity-box-desc">{{ activity.description }}</p>
+                <div class="activity-box-footer">
+                    <span class="activity-hover-hint">Hover to preview</span>
+                </div>
+            </div>
+
+            <div class="activity-box-reveal" aria-hidden="true">
+                {% if activity.hover_photos %}
+                <div class="activity-gallery-grid count-{{ activity.hover_photos|length }}">
+                    {% for photo in activity.hover_photos %}
+                    <div class="activity-gallery-cell">
+                        <img src="{{ photo.image.url }}"
+                             alt="{{ photo.caption|default:activity.title }}"
+                             class="activity-reveal-img"
+                             loading="lazy">
+                        {% if photo.caption %}
+                        <span class="activity-photo-tag">{{ photo.caption }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="activity-reveal-placeholder">
+                    <span class="activity-placeholder-icon">📸</span>
+                    <span class="activity-placeholder-text">Photographs coming soon</span>
+                </div>
+                {% endif %}
+
+                <div class="activity-reveal-scrim">
+                    <span class="reveal-scrim-title">{{ activity.title }}</span>
+                    <a href="{% url 'personal:detail' slug=activity.slug %}" class="reveal-scrim-link js-activity-detail-link">View details ↗</a>
+                </div>
+            </div>
+
+            <a href="{% url 'personal:detail' slug=activity.slug %}" class="activity-box-link" aria-label="View {{ activity.title }} details"></a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

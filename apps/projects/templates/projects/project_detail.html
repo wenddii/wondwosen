@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} — Wendwosen Tessema{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="section-label">Project</div>
+    <div class="section-content">
+        <div class="back-nav">
+            <a href="/#projects" class="back-link">← Back to Projects</a>
+        </div>
+        
+        <h1 class="section-heading">{{ project.title }}</h1>
+        <p class="lead-text">{{ project.short_description }}</p>
+
+        {% if project.image %}
+        <div class="project-hero-media">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-detail-img">
+        </div>
+        {% endif %}
+
+        {% if project.highlights_list %}
+        <div class="project-detail-block">
+            <h3>Key Highlights & Architecture</h3>
+            <ul class="project-highlights">
+                {% for highlight in project.highlights_list %}
+                <li>
+                    <span class="highlight-bullet">•</span>
+                    <span>{{ highlight }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="project-detail-block">
+            <h3>Technologies Utilized</h3>
+            <div class="project-tags">
+                {% for tech in project.tech_list %}
+                <span class="tag">{{ tech }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="project-actions-block">
+            {% if project.live_demo_url %}
+            <a href="{{ project.live_demo_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Live Demo
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+            </a>
+            {% endif %}
+            {% if project.source_code_url %}
+            <a href="{{ project.source_code_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                View Source Code
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+

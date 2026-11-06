@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO & Metadata -->
+    <title>{% block title %}Wendwosen Tessema — Software Developer & Backend Engineer{% endblock %}</title>
+    <meta name="description" content="Personal portfolio of Wendwosen Tessema, a Software Developer, Backend Engineer, and Tech Entrepreneur based in Bahir Dar, Ethiopia.">
+    <meta name="author" content="Wendwosen Tessema">
+    <meta name="keywords" content="Wendwosen Tessema, Software Developer, Backend Engineer, Django, Python, Bahir Dar, Ethiopia, Web Development, Tech Entrepreneur">
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wendwosen Tessema — Software Developer & Backend Engineer">
+    <meta property="og:description" content="Building practical software solutions, robust backend architectures, and digital business systems.">
+    <meta property="og:site_name" content="Wendwosen Tessema">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wendwosen Tessema — Software Developer & Backend Engineer">
+    <meta name="twitter:description" content="Building practical software solutions, robust backend architectures, and digital business systems.">
+
+    <!-- Minimal SVG Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' font-weight='700' fill='%23ffffff'%3EW%3C/text%3E%3C/svg%3E">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="site-wrapper">
+        {% include 'includes/navbar.html' %}
+
+        <!-- Messages / Alerts -->
+        {% if messages %}
+        <div class="toast-container" id="toastContainer">
+            {% for message in messages %}
+            <div class="toast toast-{{ message.tags }}">
+                <span class="toast-icon">✓</span>
+                <span class="toast-text">{{ message }}</span>
+                <button type="button" class="toast-close" onclick="this.parentElement.remove()" aria-label="Close message">&times;</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <main id="main-content" class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include 'includes/footer.html' %}
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

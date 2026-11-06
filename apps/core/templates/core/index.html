@@ -1,0 +1,612 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- ============================================================
+     1. PROFILE & ABOUT ME (Two-Column Horizontal Layout)
+     ============================================================ -->
+<section id="about" class="about-profile-section">
+    <div class="about-profile-grid">
+        <!-- Left Column: Rectangular Profile Portrait -->
+        <div class="about-portrait-col">
+            <div class="about-portrait-frame">
+                {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" alt="{{ profile.name }}" class="about-portrait-img">
+                {% else %}
+                <div class="about-portrait-placeholder" aria-label="{{ profile.name }}">
+                    <div class="portrait-placeholder-inner">
+                        <span class="portrait-initials">WT</span>
+                        <span class="portrait-tagline">{{ profile.name|default:'Wendwosen Tessema' }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Right Column: About Me Content -->
+        <div class="about-content-col">
+            <span class="about-section-heading">About Me</span>
+
+            <div class="about-identity">
+                <h1 class="about-name">{{ profile.name|default:'Wendwosen Tessema' }}</h1>
+                <p class="about-title">{{ profile.title|default:'Software Developer / Backend Engineer' }}</p>
+            </div>
+
+            <div class="about-bio">
+                <p>
+                    {{ profile.about_intro|default:"I'm a software developer and aspiring tech entrepreneur interested in building practical software solutions that solve real-world problems. I enjoy turning ideas into working products, developing backend systems, and exploring how technology can improve businesses and everyday life." }}
+                </p>
+                <p>
+                    {{ profile.about_full|linebreaksbr|default:"Currently studying Information Systems at Bahir Dar University, my work bridges the gap between robust backend engineering and real-world business needs. I have hands-on experience designing relational databases, architecting modular Django backends, and building enterprise systems—from retail ERPs to university registration platforms.<br><br>As a co-founder at Harbe Digital Solutions, I collaborate directly with businesses to understand operational bottlenecks and turn them into elegant software solutions. I thrive in environments where code has immediate utility, clean architecture matters, and every feature serves a clear purpose." }}
+                </p>
+            </div>
+
+            <!-- Contact Links directly underneath biography in a horizontal row -->
+            <div class="about-contact-links">
+                <a href="{{ profile.github_url|default:'https://github.com' }}" target="_blank" rel="noopener noreferrer" class="about-contact-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="{{ profile.linkedin_url|default:'https://linkedin.com' }}" target="_blank" rel="noopener noreferrer" class="about-contact-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="mailto:{{ profile.email|default:'wendwosentessema@gmail.com' }}" class="about-contact-link" aria-label="Email">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                    <span>Email</span>
+                </a>
+                <a href="{{ profile.telegram_url|default:'https://t.me' }}" target="_blank" rel="noopener noreferrer" class="about-contact-link" aria-label="Telegram">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.197 1.006.128.832.942z"/></svg>
+                    <span>Telegram</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     2. BEYOND THE CODE (Interactive Hover Reveal Showcase)
+     ============================================================ -->
+<section id="beyond-the-code" class="editorial-section beyond-code-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Beyond the Code</h2>
+        <p class="section-subtitle">A little about what I enjoy outside building software.</p>
+    </div>
+
+    {% if activities %}
+    <div class="beyond-code-boxes">
+        {% for activity in activities %}
+        <div class="activity-box js-activity-box" 
+             data-href="{% url 'personal:detail' slug=activity.slug %}"
+             tabindex="0"
+             role="region"
+             aria-label="{{ activity.title }}">
+            <!-- 1. Default Minimalist Text Layer -->
+            <div class="activity-box-content">
+                <div class="activity-box-header">
+                    <h3 class="activity-box-title">{{ activity.title }}</h3>
+                    <span class="activity-box-arrow" aria-hidden="true">↗</span>
+                </div>
+                <p class="activity-box-desc">{{ activity.description }}</p>
+                <div class="activity-box-footer">
+                    <span class="activity-hover-hint">Hover to preview</span>
+                </div>
+            </div>
+
+            <!-- 2. Interactive Photo Reveal Layer (Smooth transition on hover/tap) -->
+            <div class="activity-box-reveal" aria-hidden="true">
+                {% if activity.hover_photos %}
+                <div class="activity-gallery-grid count-{{ activity.hover_photos|length }}">
+                    {% for photo in activity.hover_photos %}
+                    <div class="activity-gallery-cell">
+                        <img src="{{ photo.image.url }}"
+                             alt="{{ photo.caption|default:activity.title }}"
+                             class="activity-reveal-img"
+                             loading="lazy">
+                        {% if photo.caption %}
+                        <span class="activity-photo-tag">{{ photo.caption }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="activity-reveal-placeholder">
+                    <span class="activity-placeholder-icon">📸</span>
+                    <span class="activity-placeholder-text">Photographs coming soon</span>
+                </div>
+                {% endif %}
+
+                <!-- Subtle scrim with activity title and direct navigation action -->
+                <div class="activity-reveal-scrim">
+                    <span class="reveal-scrim-title">{{ activity.title }}</span>
+                    <a href="{% url 'personal:detail' slug=activity.slug %}" 
+                       class="reveal-scrim-link js-activity-detail-link"
+                       tabindex="-1">
+                        View details ↗
+                    </a>
+                </div>
+            </div>
+
+            <!-- Accessible Desktop Navigation Overlay -->
+            <a href="{% url 'personal:detail' slug=activity.slug %}" 
+               class="activity-box-link" 
+               aria-label="View {{ activity.title }} details"></a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Minimalist Lightbox Viewer Modal -->
+    <div id="portfolioLightbox" class="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo Viewer">
+        <div class="lightbox-backdrop js-lightbox-close"></div>
+        <div class="lightbox-panel">
+            <button type="button" class="lightbox-close-btn js-lightbox-close" aria-label="Close photo viewer">&times;</button>
+            <div class="lightbox-stage">
+                <img src="" alt="" class="lightbox-stage-img" id="lightboxImg">
+            </div>
+            <div class="lightbox-footer">
+                <span class="lightbox-title-tag" id="lightboxTitle"></span>
+                <p class="lightbox-caption-text" id="lightboxCaption"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     2B. LIFE BEYOND THE SCREEN (Personal Moments Photo Slideshow)
+     ============================================================ -->
+<section id="life-moments" class="editorial-section life-moments-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Life Beyond the Screen</h2>
+        <p class="section-subtitle">Moments, training, and snapshots outside software engineering.</p>
+    </div>
+
+    {% if moments %}
+    <div class="moments-card-container">
+        <div class="moments-slideshow js-moments-slideshow" 
+             role="region" 
+             aria-roledescription="carousel" 
+             aria-label="Personal moments photo showcase"
+             aria-live="polite"
+             data-interval="5000"
+             tabindex="0">
+
+            <!-- Slides Track -->
+            <div class="moments-track">
+                {% for moment in moments %}
+                <article class="moments-slide js-moments-slide {% if forloop.first %}is-active{% endif %}" 
+                         role="group" 
+                         aria-roledescription="slide" 
+                         aria-label="Slide {{ forloop.counter }} of {{ moments|length }}"
+                         data-index="{{ forloop.counter0 }}">
+                    <div class="moments-image-wrap">
+                        <img src="{{ moment.image.url }}" 
+                             alt="{{ moment.caption|default:'Personal moment photograph' }}" 
+                             class="moments-img"
+                             loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+                    </div>
+
+                    <!-- Slide Caption & Counter Bar -->
+                    <div class="moments-caption-bar">
+                        <div class="moments-caption-info">
+                            {% if moment.caption %}
+                            <p class="moments-caption-text">{{ moment.caption }}</p>
+                            {% else %}
+                            <p class="moments-caption-text">Personal Moment</p>
+                            {% endif %}
+                            {% if moment.activity %}
+                            <span class="moments-category-tag">{{ moment.activity.title }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="moments-counter" aria-hidden="true">{{ forloop.counter }} / {{ moments|length }}</span>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <!-- Navigation Controls (Previous / Next) -->
+            <div class="moments-controls">
+                <button type="button" class="moments-nav-btn moments-prev-btn js-moments-prev" aria-label="Previous photograph">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <button type="button" class="moments-nav-btn moments-next-btn js-moments-next" aria-label="Next photograph">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Pagination Indicators -->
+            <div class="moments-pagination js-moments-pagination" role="tablist" aria-label="Slideshow pagination">
+                {% for moment in moments %}
+                <button type="button" 
+                        class="moments-dot js-moments-dot {% if forloop.first %}is-active{% endif %}" 
+                        role="tab" 
+                        aria-label="Go to photograph {{ forloop.counter }}" 
+                        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                        data-slide-index="{{ forloop.counter0 }}">
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="moments-empty-state">
+        <p>Personal moment photographs will appear here.</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- ============================================================
+     3. FEATURED PROJECTS (Editorial Vertical Showcase)
+     ============================================================ -->
+<section id="projects" class="editorial-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Featured Projects</h2>
+    </div>
+
+    <div class="editorial-projects-list">
+        {% for project in projects %}
+        <article class="editorial-project-item">
+            <div class="project-media-wrap">
+                {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-media-img">
+                {% else %}
+                <div class="project-media-placeholder">
+                    <div class="project-placeholder-content">
+                        <span class="project-placeholder-num">0{{ forloop.counter }}</span>
+                        <span class="project-placeholder-title">{{ project.title }}</span>
+                        <span class="project-placeholder-tag">{{ project.technologies }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="project-info-wrap">
+                <div class="project-header-row">
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <div class="project-actions">
+                        {% if project.live_demo_url %}
+                        <a href="{{ project.live_demo_url }}" target="_blank" rel="noopener noreferrer"
+                            class="project-action-link">Live Demo ↗</a>
+                        {% endif %}
+                        {% if project.source_code_url %}
+                        <a href="{{ project.source_code_url }}" target="_blank" rel="noopener noreferrer"
+                            class="project-action-link">Source Code ↗</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <p class="project-description">{{ project.short_description }}</p>
+
+                {% if project.highlights_list %}
+                <ul class="project-highlights">
+                    {% for highlight in project.highlights_list %}
+                    <li>{{ highlight }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <div class="project-meta-line">
+                    <span class="meta-label">Built with:</span>
+                    <span class="meta-value">{{ project.technologies }}</span>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+        <!-- Default Fallback Projects matching Wendwosen's real systems -->
+        <article class="editorial-project-item">
+            <div class="project-media-wrap">
+                <div class="project-media-placeholder">
+                    <div class="project-placeholder-content">
+                        <span class="project-placeholder-num">01</span>
+                        <span class="project-placeholder-title">NOAH Mini Market ERP</span>
+                        <span class="project-placeholder-tag">Python, Django, PostgreSQL, HTML, CSS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-info-wrap">
+                <div class="project-header-row">
+                    <h3 class="project-title">NOAH Mini Market ERP</h3>
+                </div>
+                <p class="project-description">Comprehensive retail enterprise resource planning system tailored for
+                    local grocery and supermarket management.</p>
+                <ul class="project-highlights">
+                    <li>Inventory management & stock movement auditing</li>
+                    <li>Real-time sales tracking & cashier session controls</li>
+                    <li>Cash reconciliation & expense ledger</li>
+                    <li>Executive business dashboard with daily analytics</li>
+                </ul>
+                <div class="project-meta-line">
+                    <span class="meta-label">Built with:</span>
+                    <span class="meta-value">Python, Django, PostgreSQL, HTML, CSS</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="editorial-project-item">
+            <div class="project-media-wrap">
+                <div class="project-media-placeholder">
+                    <div class="project-placeholder-content">
+                        <span class="project-placeholder-num">02</span>
+                        <span class="project-placeholder-title">CampusCore</span>
+                        <span class="project-placeholder-tag">Python, Django, SQLite, HTML, CSS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-info-wrap">
+                <div class="project-header-row">
+                    <h3 class="project-title">CampusCore</h3>
+                </div>
+                <p class="project-description">Specialized university non-cafeteria student registration and
+                    verification platform.</p>
+                <ul class="project-highlights">
+                    <li>Non-cafeteria student registration & batch status updates</li>
+                    <li>Automated student identity and eligibility verification</li>
+                    <li>Administrative registrar management dashboard</li>
+                </ul>
+                <div class="project-meta-line">
+                    <span class="meta-label">Built with:</span>
+                    <span class="meta-value">Python, Django, SQLite, HTML, CSS</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ============================================================
+     4. ADDITIONAL PROJECTS (Compact List)
+     ============================================================ -->
+<section class="editorial-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Additional Projects</h2>
+    </div>
+
+    <div class="compact-projects-table">
+        <div class="compact-project-row">
+            <div class="compact-project-left">
+                <span class="compact-project-title">Delala Marketplace</span>
+                <span class="compact-project-desc">Decentralized listing marketplace API with user authentication and
+                    database models.</span>
+            </div>
+            <div class="compact-project-right">
+                <span class="compact-project-tech">Django REST, PostgreSQL</span>
+            </div>
+        </div>
+
+        <div class="compact-project-row">
+            <div class="compact-project-left">
+                <span class="compact-project-title">Africa Barbershop</span>
+                <span class="compact-project-desc">Barbershop appointment booking system with automated Telegram
+                    notifications.</span>
+            </div>
+            <div class="compact-project-right">
+                <span class="compact-project-tech">Django, Telegram Bot API</span>
+            </div>
+        </div>
+
+        <div class="compact-project-row">
+            <div class="compact-project-left">
+                <span class="compact-project-title">Harbe Digital Web Platforms</span>
+                <span class="compact-project-desc">Custom web solutions and CMS integrations built for regional business
+                    clients.</span>
+            </div>
+            <div class="compact-project-right">
+                <span class="compact-project-tech">Python, JavaScript, Docker</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-footer-link">
+        <a href="{{ profile.github_url|default:'https://github.com' }}" target="_blank" rel="noopener noreferrer"
+            class="text-link">
+            View more repositories on GitHub ↗
+        </a>
+    </div>
+</section>
+
+<!-- ============================================================
+     5. EDUCATION (Chronological)
+     ============================================================ -->
+<section class="editorial-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Education</h2>
+    </div>
+
+    <div class="chronology-list">
+        <div class="chronology-item">
+            <div class="chronology-date">2023 — Present</div>
+            <div class="chronology-content">
+                <h3 class="chronology-title">Bahir Dar University</h3>
+                <p class="chronology-subtitle">Bachelor of Science in Information Systems</p>
+                <p class="chronology-description">
+                    Core coursework and practical specialization in systems analysis, relational database design,
+                    backend software engineering, data structures, and enterprise architecture.
+                </p>
+            </div>
+        </div>
+        <div class="chronology-item">
+            <div class="chronology-date">2025 — 2026</div>
+            <div class="chronology-content">
+                <h3 class="chronology-title">ALX</h3>
+                <p class="chronology-subtitle">Online Backend Web Development Specialization</p>
+                <p class="chronology-description">
+                    Intensive backend software development program undertaken concurrently with university studies, focusing on Python, Linux, advanced data structures, APIs, and scalable web engineering.
+                </p>
+            </div>
+        </div>
+        <div class="chronology-item">
+            <div class="chronology-date">2019 — 2023</div>
+            <div class="chronology-content">
+                <h3 class="chronology-title">Catholic High School, Bahir Dar</h3>
+                <p class="chronology-subtitle">Secondary Education &mdash; Natural Science</p>
+                <p class="chronology-description">
+                    Completed high school education with a strong foundation in mathematics, analytical sciences, and computational problem-solving.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     6. EXPERIENCE (Work, Consulting & Leadership)
+     ============================================================ -->
+<section id="experience" class="editorial-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Experience</h2>
+    </div>
+
+    <div class="chronology-list">
+        {% for exp in experiences %}
+        <div class="chronology-item">
+            <div class="chronology-date">{{ exp.period }}</div>
+            <div class="chronology-content">
+                <h3 class="chronology-title">
+                    {{ exp.role }} &mdash;
+                    {% if exp.company_url %}
+                    <a href="{{ exp.company_url }}" target="_blank" rel="noopener noreferrer">{{ exp.company }}</a>
+                    {% else %}
+                    <span>{{ exp.company }}</span>
+                    {% endif %}
+                </h3>
+                <p class="chronology-description">{{ exp.description }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <!-- Default Fallback Experience -->
+        <div class="chronology-item">
+            <div class="chronology-date">2024</div>
+            <div class="chronology-content">
+                <h3 class="chronology-title">Software Development Intern &mdash; Ethio Telecom</h3>
+                <p class="chronology-description">
+                    Contributed to software development initiatives, telecom service workflows, and backend system tasks
+                    within an enterprise environment.
+                </p>
+            </div>
+        </div>
+
+        <div class="chronology-item">
+            <div class="chronology-date">2024 — Present</div>
+            <div class="chronology-content">
+                <h3 class="chronology-title">Co-founder, Technology & Product &mdash; Harbe Digital Solutions</h3>
+                <p class="chronology-description">
+                    Directing technical architecture, designing custom software systems, and building digital products
+                    that address operational bottlenecks for business clients.
+                </p>
+            </div>
+        </div>
+
+        <div class="chronology-item">
+            <div class="chronology-date">2023 — Present</div>
+            <div class="chronology-content">
+                <h3 class="chronology-title">Freelance Software Developer &mdash; Independent Practice</h3>
+                <p class="chronology-description">
+                    Developing customized web applications, database schemas, inventory platforms, and client management
+                    tools for small-to-medium businesses.
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ============================================================
+     7. AWARDS & PERSONAL CLOSING
+     ============================================================ -->
+<section class="editorial-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Closing Note</h2>
+    </div>
+
+    <div class="closing-prose">
+        <p>
+            I believe that software is most meaningful when it solves practical problems and creates tangible value.
+            Whether engineering backend architectures, designing databases, or co-founding digital solutions, I focus on
+            clean code, longevity, and building software that lasts.
+        </p>
+        <p class="closing-signoff">
+            Always open to discussing new engineering challenges, startup ideas, or backend opportunities.
+        </p>
+    </div>
+</section>
+
+<!-- ============================================================
+     8. CONTACT
+     ============================================================ -->
+<section id="contact" class="editorial-section contact-section">
+    <div class="section-title-wrap">
+        <h2 class="section-title">Let's Connect</h2>
+    </div>
+
+    <p class="contact-intro">
+        Have a project, opportunity, or interesting idea? You can reach me through any of the channels below or leave a
+        direct message.
+    </p>
+
+    <div class="contact-methods">
+        <a href="mailto:{{ profile.email|default:'wendwosentessema@gmail.com' }}" class="contact-method-item">
+            <span class="method-label">Email</span>
+            <span class="method-val">{{ profile.email|default:'wendwosentessema@gmail.com' }} ↗</span>
+        </a>
+        <a href="{{ profile.linkedin_url|default:'https://linkedin.com' }}" target="_blank" rel="noopener noreferrer"
+            class="contact-method-item">
+            <span class="method-label">LinkedIn</span>
+            <span class="method-val">Wendwosen Tessema ↗</span>
+        </a>
+        <a href="{{ profile.github_url|default:'https://github.com' }}" target="_blank" rel="noopener noreferrer"
+            class="contact-method-item">
+            <span class="method-label">GitHub</span>
+            <span class="method-val">github.com ↗</span>
+        </a>
+        <a href="{{ profile.telegram_url|default:'https://t.me' }}" target="_blank" rel="noopener noreferrer"
+            class="contact-method-item">
+            <span class="method-label">Telegram</span>
+            <span class="method-val">Direct Message ↗</span>
+        </a>
+    </div>
+
+    <!-- Direct Message Form -->
+    <div class="editorial-form-wrap">
+        <h3 class="form-title">Send a Message</h3>
+        <form action="{% url 'contact:submit' %}" method="POST" class="contact-form" id="contactForm">
+            {% csrf_token %}
+            {{ contact_form.website }}
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="id_name" class="field-label">Name</label>
+                    {{ contact_form.name }}
+                    {% if contact_form.name.errors %}
+                    <span class="form-error">{{ contact_form.name.errors.0 }}</span>
+                    {% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="id_email" class="field-label">Email</label>
+                    {{ contact_form.email }}
+                    {% if contact_form.email.errors %}
+                    <span class="form-error">{{ contact_form.email.errors.0 }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="id_message" class="field-label">Message</label>
+                {{ contact_form.message }}
+                {% if contact_form.message.errors %}
+                <span class="form-error">{{ contact_form.message.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-submit-row">
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span>Send Message</span>
+                </button>
+                <span class="form-status" id="formStatus" aria-live="polite"></span>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
