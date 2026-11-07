@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Personal Moments Photo Slideshow ("Life Beyond the Screen")
     const momentsSlideshow = document.querySelector('.js-moments-slideshow');
-    if (momentsSlideshow) {
+    if (momentsSlideshow && !momentsSlideshow.hasAttribute('data-template-carousel')) {
         const slides = momentsSlideshow.querySelectorAll('.js-moments-slide');
         const dots = momentsSlideshow.querySelectorAll('.js-moments-dot');
         const prevBtn = momentsSlideshow.querySelector('.js-moments-prev');
@@ -265,6 +265,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     dot.classList.toggle('is-active', isActive);
                     dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
                 });
+
+                if (momentsSlideshow.classList.contains('moments-strip')) {
+                    slides[currentIndex].scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                        block: 'nearest',
+                        inline: 'start'
+                    });
+                }
             };
 
             const nextSlide = () => goToSlide(currentIndex + 1);
@@ -389,4 +397,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-

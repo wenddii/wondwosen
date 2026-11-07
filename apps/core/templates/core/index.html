@@ -2,46 +2,42 @@
 {% load static %}
 
 {% block content %}
+<div class="meetup-pill">WENDWOSEN'S MEETUP — 2026 <span aria-hidden="true">&rarr;</span></div>
+
 <!-- ============================================================
      1. PROFILE & ABOUT ME (Two-Column Horizontal Layout)
      ============================================================ -->
 <section id="about" class="about-profile-section">
     <div class="about-profile-grid">
-        <!-- Left Column: Rectangular Profile Portrait -->
         <div class="about-portrait-col">
-            <div class="about-portrait-frame">
-                {% if profile.avatar %}
-                <img src="{{ profile.avatar.url }}" alt="{{ profile.name }}" class="about-portrait-img">
-                {% else %}
-                <div class="about-portrait-placeholder" aria-label="{{ profile.name }}">
-                    <div class="portrait-placeholder-inner">
-                        <span class="portrait-initials">WT</span>
-                        <span class="portrait-tagline">{{ profile.name|default:'Wendwosen Tessema' }}</span>
-                    </div>
-                </div>
-                {% endif %}
+            {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="{{ profile.name }}" class="about-portrait-img">
+            {% else %}
+            <div class="about-portrait-placeholder" aria-label="{{ profile.name }}">
+                <span class="portrait-initials">WT</span>
             </div>
+            {% endif %}
         </div>
 
-        <!-- Right Column: About Me Content -->
         <div class="about-content-col">
-            <span class="about-section-heading">About Me</span>
-
-            <div class="about-identity">
+            <div class="about-identity-badge">
+                <span class="identity-icon" aria-hidden="true">W</span>
+                <div class="about-identity">
                 <h1 class="about-name">{{ profile.name|default:'Wendwosen Tessema' }}</h1>
-                <p class="about-title">{{ profile.title|default:'Software Developer / Backend Engineer' }}</p>
+                <p class="about-title">{{ profile.title|default:'Software Developer | Tech Entrepreneur' }}</p>
+                </div>
+                <button type="button" class="theme-toggle" aria-label="Toggle theme">☼</button>
             </div>
 
-            <div class="about-bio">
-                <p>
-                    {{ profile.about_intro|default:"I'm a software developer and aspiring tech entrepreneur interested in building practical software solutions that solve real-world problems. I enjoy turning ideas into working products, developing backend systems, and exploring how technology can improve businesses and everyday life." }}
-                </p>
-                <p>
-                    {{ profile.about_full|linebreaksbr|default:"Currently studying Information Systems at Bahir Dar University, my work bridges the gap between robust backend engineering and real-world business needs. I have hands-on experience designing relational databases, architecting modular Django backends, and building enterprise systems—from retail ERPs to university registration platforms.<br><br>As a co-founder at Harbe Digital Solutions, I collaborate directly with businesses to understand operational bottlenecks and turn them into elegant software solutions. I thrive in environments where code has immediate utility, clean architecture matters, and every feature serves a clear purpose." }}
-                </p>
+            <div class="about-bio whitespace-pre-line max-w-prose">
+                {% if profile.about_intro %}
+                <p class="mb-2.5">{{ profile.about_intro|linebreaksbr }}</p>
+                {% endif %}
+                {% if profile.about_full %}
+                <p class="mb-2.5">{{ profile.about_full|linebreaksbr }}</p>
+                {% endif %}
             </div>
 
-            <!-- Contact Links directly underneath biography in a horizontal row -->
             <div class="about-contact-links">
                 <a href="{{ profile.github_url|default:'https://github.com' }}" target="_blank" rel="noopener noreferrer" class="about-contact-link" aria-label="GitHub">
                     <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
@@ -59,6 +55,10 @@
                     <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.197 1.006.128.832.942z"/></svg>
                     <span>Telegram</span>
                 </a>
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="about-contact-link" aria-label="X">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 4 14 16M19 4 5 20"/></svg>
+                </a>
+                <a href="mailto:{{ profile.email|default:'wendwosentessema@gmail.com' }}" class="book-call">Book a Call</a>
             </div>
         </div>
     </div>
@@ -70,13 +70,12 @@
 <section id="beyond-the-code" class="editorial-section beyond-code-section">
     <div class="section-title-wrap">
         <h2 class="section-title">Beyond the Code</h2>
-        <p class="section-subtitle">A little about what I enjoy outside building software.</p>
     </div>
 
     {% if activities %}
     <div class="beyond-code-boxes">
         {% for activity in activities %}
-        <div class="activity-box js-activity-box" 
+        <div class="activity-box group js-activity-box"
              data-href="{% url 'personal:detail' slug=activity.slug %}"
              tabindex="0"
              role="region"
@@ -84,13 +83,24 @@
             <!-- 1. Default Minimalist Text Layer -->
             <div class="activity-box-content">
                 <div class="activity-box-header">
-                    <h3 class="activity-box-title">{{ activity.title }}</h3>
-                    <span class="activity-box-arrow" aria-hidden="true">↗</span>
+                    <span class="activity-box-icon" aria-hidden="true">
+                        {% if forloop.counter == 1 %}
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m4 20 4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11L4 20zM14 6l4 4"/></svg>
+                        {% elif forloop.counter == 2 %}
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3v8M3 8h6M18 13v8M15 18h6M12 4v3M9 17v3"/></svg>
+                        {% else %}
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5M14 15c2.8-.5 5 .9 5 3"/></svg>
+                        {% endif %}
+                    </span>
+                    <h3 class="activity-box-title">
+                        {% if forloop.counter == 1 %}Content{% elif forloop.counter == 2 %}Fitness &amp; Boxing{% else %}Community{% endif %}
+                    </h3>
                 </div>
-                <p class="activity-box-desc">{{ activity.description }}</p>
-                <div class="activity-box-footer">
-                    <span class="activity-hover-hint">Hover to preview</span>
-                </div>
+                <p class="activity-box-desc">
+                    {% if forloop.counter == 1 %}Sharing developer milestones and backend tutorials on YouTube and TikTok.
+                    {% elif forloop.counter == 2 %}Training and discipline outside of software engineering.
+                    {% else %}Active participation in tech meetups and campus associations.{% endif %}
+                </p>
             </div>
 
             <!-- 2. Interactive Photo Reveal Layer (Smooth transition on hover/tap) -->
@@ -163,16 +173,18 @@
 
     {% if moments %}
     <div class="moments-card-container">
-        <div class="moments-slideshow js-moments-slideshow" 
+        <div id="photo-carousel-track"
+             class="moments-slideshow moments-strip js-moments-slideshow"
              role="region" 
              aria-roledescription="carousel" 
              aria-label="Personal moments photo showcase"
              aria-live="polite"
-             data-interval="5000"
+             data-interval="2000"
+             data-template-carousel="true"
              tabindex="0">
 
             <!-- Slides Track -->
-            <div class="moments-track">
+            <div class="moments-track photo-carousel-items">
                 {% for moment in moments %}
                 <article class="moments-slide js-moments-slide {% if forloop.first %}is-active{% endif %}" 
                          role="group" 
@@ -184,21 +196,6 @@
                              alt="{{ moment.caption|default:'Personal moment photograph' }}" 
                              class="moments-img"
                              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
-                    </div>
-
-                    <!-- Slide Caption & Counter Bar -->
-                    <div class="moments-caption-bar">
-                        <div class="moments-caption-info">
-                            {% if moment.caption %}
-                            <p class="moments-caption-text">{{ moment.caption }}</p>
-                            {% else %}
-                            <p class="moments-caption-text">Personal Moment</p>
-                            {% endif %}
-                            {% if moment.activity %}
-                            <span class="moments-category-tag">{{ moment.activity.title }}</span>
-                            {% endif %}
-                        </div>
-                        <span class="moments-counter" aria-hidden="true">{{ forloop.counter }} / {{ moments|length }}</span>
                     </div>
                 </article>
                 {% endfor %}
@@ -281,16 +278,8 @@
 
                 <p class="project-description">{{ project.short_description }}</p>
 
-                {% if project.highlights_list %}
-                <ul class="project-highlights">
-                    {% for highlight in project.highlights_list %}
-                    <li>{{ highlight }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-
                 <div class="project-meta-line">
-                    <span class="meta-label">Built with:</span>
+                    <span class="meta-label">Stack</span>
                     <span class="meta-value">{{ project.technologies }}</span>
                 </div>
             </div>
@@ -313,14 +302,8 @@
                 </div>
                 <p class="project-description">Comprehensive retail enterprise resource planning system tailored for
                     local grocery and supermarket management.</p>
-                <ul class="project-highlights">
-                    <li>Inventory management & stock movement auditing</li>
-                    <li>Real-time sales tracking & cashier session controls</li>
-                    <li>Cash reconciliation & expense ledger</li>
-                    <li>Executive business dashboard with daily analytics</li>
-                </ul>
                 <div class="project-meta-line">
-                    <span class="meta-label">Built with:</span>
+                    <span class="meta-label">Stack</span>
                     <span class="meta-value">Python, Django, PostgreSQL, HTML, CSS</span>
                 </div>
             </div>
@@ -342,13 +325,8 @@
                 </div>
                 <p class="project-description">Specialized university non-cafeteria student registration and
                     verification platform.</p>
-                <ul class="project-highlights">
-                    <li>Non-cafeteria student registration & batch status updates</li>
-                    <li>Automated student identity and eligibility verification</li>
-                    <li>Administrative registrar management dashboard</li>
-                </ul>
                 <div class="project-meta-line">
-                    <span class="meta-label">Built with:</span>
+                    <span class="meta-label">Stack</span>
                     <span class="meta-value">Python, Django, SQLite, HTML, CSS</span>
                 </div>
             </div>
@@ -533,80 +511,61 @@
     </div>
 </section>
 
-<!-- ============================================================
-     8. CONTACT
-     ============================================================ -->
-<section id="contact" class="editorial-section contact-section">
-    <div class="section-title-wrap">
-        <h2 class="section-title">Let's Connect</h2>
-    </div>
+{% endblock %}
 
-    <p class="contact-intro">
-        Have a project, opportunity, or interesting idea? You can reach me through any of the channels below or leave a
-        direct message.
-    </p>
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const carousel = document.getElementById('photo-carousel-track');
+    if (!carousel) return;
 
-    <div class="contact-methods">
-        <a href="mailto:{{ profile.email|default:'wendwosentessema@gmail.com' }}" class="contact-method-item">
-            <span class="method-label">Email</span>
-            <span class="method-val">{{ profile.email|default:'wendwosentessema@gmail.com' }} ↗</span>
-        </a>
-        <a href="{{ profile.linkedin_url|default:'https://linkedin.com' }}" target="_blank" rel="noopener noreferrer"
-            class="contact-method-item">
-            <span class="method-label">LinkedIn</span>
-            <span class="method-val">Wendwosen Tessema ↗</span>
-        </a>
-        <a href="{{ profile.github_url|default:'https://github.com' }}" target="_blank" rel="noopener noreferrer"
-            class="contact-method-item">
-            <span class="method-label">GitHub</span>
-            <span class="method-val">github.com ↗</span>
-        </a>
-        <a href="{{ profile.telegram_url|default:'https://t.me' }}" target="_blank" rel="noopener noreferrer"
-            class="contact-method-item">
-            <span class="method-label">Telegram</span>
-            <span class="method-val">Direct Message ↗</span>
-        </a>
-    </div>
+    const track = carousel.querySelector('.photo-carousel-items');
+    const items = track ? Array.from(track.querySelectorAll('.moments-slide')) : [];
+    if (!track || items.length < 2) return;
 
-    <!-- Direct Message Form -->
-    <div class="editorial-form-wrap">
-        <h3 class="form-title">Send a Message</h3>
-        <form action="{% url 'contact:submit' %}" method="POST" class="contact-form" id="contactForm">
-            {% csrf_token %}
-            {{ contact_form.website }}
+    let currentIndex = 0;
+    let timerId = null;
+    let isPaused = false;
 
-            <div class="form-row">
-                <div class="form-field">
-                    <label for="id_name" class="field-label">Name</label>
-                    {{ contact_form.name }}
-                    {% if contact_form.name.errors %}
-                    <span class="form-error">{{ contact_form.name.errors.0 }}</span>
-                    {% endif %}
-                </div>
-                <div class="form-field">
-                    <label for="id_email" class="field-label">Email</label>
-                    {{ contact_form.email }}
-                    {% if contact_form.email.errors %}
-                    <span class="form-error">{{ contact_form.email.errors.0 }}</span>
-                    {% endif %}
-                </div>
-            </div>
+    const getStep = function () {
+        const cardWidth = items[0].getBoundingClientRect().width;
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || '0');
+        return cardWidth + gap;
+    };
 
-            <div class="form-field">
-                <label for="id_message" class="field-label">Message</label>
-                {{ contact_form.message }}
-                {% if contact_form.message.errors %}
-                <span class="form-error">{{ contact_form.message.errors.0 }}</span>
-                {% endif %}
-            </div>
+    const showNext = function () {
+        currentIndex = (currentIndex + 1) % items.length;
+        track.style.transform = 'translateX(-' + (currentIndex * getStep()) + 'px)';
+    };
 
-            <div class="form-submit-row">
-                <button type="submit" class="btn-submit" id="submitBtn">
-                    <span>Send Message</span>
-                </button>
-                <span class="form-status" id="formStatus" aria-live="polite"></span>
-            </div>
-        </form>
-    </div>
-</section>
+    const startRotation = function () {
+        if (isPaused || timerId !== null) return;
+        timerId = window.setInterval(showNext, 2000);
+    };
+
+    const stopRotation = function () {
+        if (timerId !== null) {
+            window.clearInterval(timerId);
+            timerId = null;
+        }
+    };
+
+    carousel.addEventListener('mouseenter', function () {
+        isPaused = true;
+        stopRotation();
+    });
+
+    carousel.addEventListener('mouseleave', function () {
+        isPaused = false;
+        startRotation();
+    });
+
+    window.addEventListener('resize', function () {
+        track.style.transform = 'translateX(-' + (currentIndex * getStep()) + 'px)';
+    });
+
+    startRotation();
+});
+</script>
 {% endblock %}
