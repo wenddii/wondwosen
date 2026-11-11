@@ -79,10 +79,16 @@ ASGI_APPLICATION = 'config.asgi.application'
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
+    # Vercel functions are short-lived, so persistent connections can become
+    # stale between invocations. Neon pooling is controlled by the URL itself.
+    IS_VERCEL = bool(os.getenv('VERCEL'))
+    default_conn_max_age = 0 if IS_VERCEL else 600
+    conn_max_age = int(os.getenv('DATABASE_CONN_MAX_AGE', default_conn_max_age))
     DATABASES = {
         'default': dj_database_url.parse(
             DATABASE_URL,
-            conn_max_age=600,
+            conn_max_age=conn_max_age,
+            conn_health_checks=True,
             ssl_require=True,
         )
     }

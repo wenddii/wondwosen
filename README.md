@@ -135,3 +135,10 @@ Open your browser at [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view yo
 - **Mobile Responsive**: Flexbox and CSS Grid layout with a hamburger navigation drawer for tablets and phones.
 - **Production Ready**: Includes WhiteNoise for static files and environment variable isolation for secrets.
 
+### Vercel and Neon PostgreSQL
+
+Set `DATABASE_URL` in Vercel to the Neon connection string. Prefer Neon’s pooled
+connection string for serverless workloads. The application uses psycopg 3 with
+its binary distribution and disables persistent Django connections automatically
+when the `VERCEL` environment variable is present. `DATABASE_CONN_MAX_AGE` can
+be set explicitly when a different connection lifetime is required.
