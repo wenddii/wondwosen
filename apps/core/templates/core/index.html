@@ -344,38 +344,31 @@
     </div>
 
     <div class="compact-projects-table">
+        {% for project in additional_projects %}
         <div class="compact-project-row">
             <div class="compact-project-left">
-                <span class="compact-project-title">Delala Marketplace</span>
-                <span class="compact-project-desc">Decentralized listing marketplace API with user authentication and
-                    database models.</span>
+                <span class="compact-project-title">{{ project.title }}</span>
+                <span class="compact-project-desc">{{ project.short_description }}</span>
             </div>
             <div class="compact-project-right">
-                <span class="compact-project-tech">Django REST, PostgreSQL</span>
+                <span class="compact-project-tech">{{ project.technologies }}</span>
+                <div class="project-actions">
+                    {% if project.live_demo_url %}
+                    <a href="{{ project.live_demo_url }}" target="_blank" rel="noopener noreferrer"
+                        class="project-action-link">Live Demo ↗</a>
+                    {% endif %}
+                    {% if project.source_code_url %}
+                    <a href="{{ project.source_code_url }}" target="_blank" rel="noopener noreferrer"
+                        class="project-action-link">GitHub ↗</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-
-        <div class="compact-project-row">
-            <div class="compact-project-left">
-                <span class="compact-project-title">Africa Barbershop</span>
-                <span class="compact-project-desc">Barbershop appointment booking system with automated Telegram
-                    notifications.</span>
-            </div>
-            <div class="compact-project-right">
-                <span class="compact-project-tech">Django, Telegram Bot API</span>
-            </div>
+        {% empty %}
+        <div class="moments-empty-state">
+            <p>No additional projects to display.</p>
         </div>
-
-        <div class="compact-project-row">
-            <div class="compact-project-left">
-                <span class="compact-project-title">Harbe Digital Web Platforms</span>
-                <span class="compact-project-desc">Custom web solutions and CMS integrations built for regional business
-                    clients.</span>
-            </div>
-            <div class="compact-project-right">
-                <span class="compact-project-tech">Python, JavaScript, Docker</span>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 
     <div class="section-footer-link">

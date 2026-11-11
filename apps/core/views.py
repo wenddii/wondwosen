@@ -20,6 +20,7 @@ def index(request):
 
     # Fetch projects and experiences
     projects = Project.objects.filter(is_featured=True).order_by('order', '-created_at')
+    additional_projects = Project.objects.filter(is_featured=False).order_by('order', '-created_at')
     experiences = Experience.objects.all().order_by('order', '-id')
 
     # Fetch published personal activities with their ordered photographs
@@ -35,6 +36,7 @@ def index(request):
         'profile': profile,
         'tech_grouped': tech_grouped,
         'projects': projects,
+        'additional_projects': additional_projects,
         'experiences': experiences,
         'activities': activities,
         'moments': moments,
