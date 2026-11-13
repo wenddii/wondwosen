@@ -4,20 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Keep the subtle page guide aligned with the Activities section.
-    const siteWrapper = document.querySelector('.site-wrapper');
-    const activitiesSection = document.getElementById('beyond-the-code');
-
-    if (siteWrapper && activitiesSection) {
-        const alignActivitiesGuide = () => {
-            const sectionTop = activitiesSection.getBoundingClientRect().top + window.scrollY;
-            siteWrapper.style.setProperty('--activities-line-start', `${sectionTop}px`);
-        };
-
-        alignActivitiesGuide();
-        window.addEventListener('resize', alignActivitiesGuide);
-    }
-
     // 1. Mobile Menu Toggle
     const navToggle = document.getElementById('navToggle');
     const siteNav = document.getElementById('siteNav');

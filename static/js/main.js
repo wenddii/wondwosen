@@ -7,11 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Keep the subtle page guide aligned with the Activities section.
     const siteWrapper = document.querySelector('.site-wrapper');
     const activitiesSection = document.getElementById('beyond-the-code');
+    const projectsSection = document.getElementById('projects');
 
-    if (siteWrapper && activitiesSection) {
+    if (siteWrapper && activitiesSection && projectsSection) {
         const alignActivitiesGuide = () => {
             const sectionTop = activitiesSection.getBoundingClientRect().top + window.scrollY;
+            const projectsTop = projectsSection.getBoundingClientRect().top + window.scrollY;
             siteWrapper.style.setProperty('--activities-line-start', `${sectionTop}px`);
+            siteWrapper.style.setProperty(
+                '--activities-line-height',
+                `${Math.max(0, projectsTop - sectionTop)}px`
+            );
         };
 
         alignActivitiesGuide();
