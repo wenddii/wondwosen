@@ -95,8 +95,8 @@ textarea {
 
 .site-wrapper::after {
     content: '';
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: var(--activities-line-start, 0px);
     bottom: 0;
     left: 50%;
     width: 0;
@@ -1466,6 +1466,37 @@ textarea {
     font-weight: 500;
 }
 
+.closing-message {
+    gap: 0.75rem;
+    max-width: 62ch;
+}
+
+.closing-verse {
+    color: var(--text-primary);
+    font-family: 'Noto Sans Ethiopic', var(--font-sans);
+    font-size: clamp(1.35rem, 3.8vw, 2rem);
+    font-weight: 700;
+    line-height: 1.65;
+    letter-spacing: 0;
+}
+
+.closing-reference {
+    color: var(--text-muted);
+    font-family: 'Noto Sans Ethiopic', var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0;
+}
+
+.closing-final-line {
+    margin-top: 0.75rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
 /* --------------------------------------------------------------------------
    8. Contact
    -------------------------------------------------------------------------- */
@@ -2649,7 +2680,7 @@ body {
     display: none;
 }
 
-.meetup-pill {
+.youtube-pill {
     display: flex;
     width: fit-content;
     align-items: center;
@@ -3269,7 +3300,7 @@ body {
 .project-description,
 .chronology-description,
 .contact-intro,
-.closing-prose {
+.closing-prose:not(.closing-message) {
     color: var(--text-secondary);
     font-size: 0.95rem;
     font-weight: 500;
@@ -3493,7 +3524,7 @@ body {
         white-space: nowrap;
     }
 
-    .meetup-pill {
+    .youtube-pill {
         max-width: 100%;
         padding: 0.4rem 0.75rem;
         font-size: 0.65rem;
