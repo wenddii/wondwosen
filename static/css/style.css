@@ -3090,3 +3090,478 @@ body {
         width: 14rem;
     }
 }
+
+/* --------------------------------------------------------------------------
+   Accessibility and responsive polish
+   -------------------------------------------------------------------------- */
+:root {
+    --content-width: 820px;
+    --text-secondary: #404040;
+    --text-muted: #595959;
+}
+
+html,
+body {
+    overflow-x: clip;
+}
+
+body {
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: -0.006em;
+}
+
+.site-header {
+    display: block;
+    min-height: var(--header-height);
+}
+
+.header-container {
+    min-height: 60px;
+    height: auto;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.nav-cv {
+    min-height: 36px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.78rem;
+}
+
+.main-content {
+    max-width: var(--content-width);
+    padding: 2.5rem 1.5rem 3rem;
+}
+
+.editorial-section,
+.section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.about-profile-section {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.08rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+.section-title::after {
+    height: 1.1rem;
+}
+
+.section-subtitle,
+.section-description,
+.lead-text {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+.about-profile-grid {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 2rem;
+}
+
+.about-portrait-col {
+    flex-basis: 180px;
+    width: 180px;
+}
+
+.about-portrait-img,
+.about-portrait-placeholder {
+    width: 180px;
+}
+
+.about-content-col {
+    gap: 1rem;
+}
+
+.about-name {
+    font-size: 1.55rem;
+    font-weight: 750;
+}
+
+.about-title {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.about-bio {
+    max-width: 66ch;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    font-weight: 500;
+    line-height: 1.75;
+}
+
+.about-bio p + p {
+    margin-top: 0.9rem;
+}
+
+.about-contact-links {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.about-contact-link,
+.book-call,
+.project-action-link,
+.btn,
+.activity-social-pill {
+    min-height: 40px;
+}
+
+.about-contact-link {
+    width: auto;
+    min-width: 40px;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+}
+
+.about-contact-link span {
+    display: inline;
+}
+
+.book-call {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.beyond-code-boxes {
+    gap: 1rem;
+}
+
+.activity-box {
+    min-height: 210px;
+    height: auto;
+}
+
+.activity-box-content {
+    padding: 1.5rem 1.25rem;
+}
+
+.activity-box-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+}
+
+.activity-box-desc,
+.project-description,
+.chronology-description,
+.contact-intro,
+.closing-prose {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.75;
+}
+
+.editorial-projects-list {
+    gap: 2.5rem;
+}
+
+.editorial-project-item {
+    gap: 1.5rem;
+}
+
+.project-media-wrap {
+    min-height: 190px;
+    height: 190px;
+}
+
+.project-title {
+    font-size: 1.08rem;
+    font-weight: 700;
+}
+
+.project-meta-line,
+.project-meta-line .meta-value {
+    font-size: 0.85rem;
+}
+
+.project-action-link {
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.compact-project-row {
+    gap: 1rem;
+    padding: 1.1rem 0;
+}
+
+.compact-project-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+}
+
+.compact-project-desc,
+.compact-project-tech {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.activity-detail-title,
+.section-heading {
+    font-weight: 750;
+    letter-spacing: -0.03em;
+}
+
+.activity-detail-title {
+    font-size: clamp(1.7rem, 5vw, 2.35rem);
+}
+
+.activity-detail-lead,
+.activity-detail-body {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.activity-detail-body p + p {
+    margin-top: 1.1rem;
+}
+
+.gallery-heading,
+.project-detail-block h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.detail-gallery-grid {
+    gap: 1rem;
+}
+
+.site-footer {
+    margin-top: auto;
+    padding: 2rem 0;
+}
+
+.footer-container {
+    max-width: var(--content-width);
+    padding: 0 1.5rem;
+}
+
+.footer-copyright,
+.footer-location,
+.footer-links a {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.footer-links {
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1.5rem 1rem 2.5rem;
+    }
+
+    .header-container {
+        min-height: 58px;
+        padding: 0 1rem;
+    }
+
+    .brand-name {
+        font-size: 0.88rem;
+    }
+
+    .site-nav {
+        top: 58px;
+        padding: 0.75rem 1rem;
+    }
+
+    .site-nav .nav-list {
+        gap: 0.25rem;
+    }
+
+    .site-nav .nav-link {
+        width: 100%;
+        min-height: 46px;
+        padding: 0.35rem 0;
+        font-size: 0.95rem;
+    }
+
+    .site-nav .nav-cv {
+        width: fit-content;
+        padding: 0.35rem 0.75rem;
+    }
+
+    .editorial-section,
+    .section {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .about-profile-section {
+        padding-top: 2rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .about-profile-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .about-portrait-col {
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    .about-portrait-img,
+    .about-portrait-placeholder {
+        width: min(170px, 100%);
+        margin: 0 auto;
+    }
+
+    .about-name {
+        font-size: 1.4rem;
+    }
+
+    .about-bio,
+    .activity-detail-lead,
+    .activity-detail-body {
+        font-size: 0.96rem;
+    }
+
+    .beyond-code-boxes {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-box {
+        min-height: 170px;
+    }
+
+    .editorial-project-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .project-media-wrap {
+        height: 210px;
+    }
+
+    .project-header-row {
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .project-actions {
+        flex-wrap: wrap;
+    }
+
+    .footer-container {
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding-left: 0.875rem;
+        padding-right: 0.875rem;
+    }
+
+    .brand-name {
+        max-width: 13rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .meetup-pill {
+        max-width: 100%;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.65rem;
+    }
+
+    .section-title {
+        font-size: 1rem;
+    }
+
+    .about-identity-badge {
+        padding: 0.75rem;
+    }
+
+    .about-contact-links {
+        gap: 0.5rem;
+    }
+
+    .about-contact-link {
+        min-width: 38px;
+        padding: 0.35rem 0.55rem;
+    }
+
+    .about-contact-link span {
+        display: none;
+    }
+
+    .book-call {
+        padding: 0.4rem 0.7rem;
+    }
+
+    .project-media-wrap {
+        height: 180px;
+        min-height: 180px;
+    }
+
+    .project-header-row {
+        flex-direction: column;
+    }
+
+    .project-actions-block,
+    .project-actions {
+        width: 100%;
+    }
+
+    .project-actions-block {
+        flex-direction: column;
+    }
+
+    .project-actions-block .btn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
